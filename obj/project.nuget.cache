@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "lgPvJzPYhbL/9beh4Q5DV7uugq/2qRR2g9/c/UB+0z4WI1u7xlVyxZId2SpOvn9sEta4vo+S8cS2ohIfo3CvtA==",
+  "success": true,
+  "projectFilePath": "/media/MassMedia/iokg/c#/TermPaint/TermPaint.csproj",
+  "expectedPackageFiles": [
+    "/home/iokg/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.8/microsoft.aspnetcore.app.ref.6.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
