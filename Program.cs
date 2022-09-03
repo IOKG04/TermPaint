@@ -1,4 +1,5 @@
 ﻿using System;
+using TermPaint.Base;
 
 namespace TermPaint;
 

@@ -13,3 +13,5 @@
 /media/MassMedia/iokg/c#/TermPaint/obj/Debug/net6.0/ref/TermPaint.dll
 /media/MassMedia/iokg/c#/TermPaint/obj/Debug/net6.0/TermPaint.pdb
 /media/MassMedia/iokg/c#/TermPaint/obj/Debug/net6.0/TermPaint.genruntimeconfig.cache
+/media/MassMedia/iokg/c#/TermPaint/bin/Debug/net6.0/Pastel.dll
+/media/MassMedia/iokg/c#/TermPaint/obj/Debug/net6.0/TermPaint.csproj.CopyComplete

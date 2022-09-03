@@ -1,11 +1,41 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Pastel/3.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Pastel.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Pastel.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Pastel/3.0.1": {
+      "sha512": "HlxB9PGDNKgwxxqiQ0wnYKt8XZ6sJ25vJ2jVnMZ7lYVDVeo1SZ/6RM9m4bvYwV6dFTfk+RoR3T2LV/oSVu6ZDw==",
+      "type": "package",
+      "path": "pastel/3.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "icon.png",
+        "lib/net6.0/Pastel.dll",
+        "lib/net6.0/Pastel.xml",
+        "lib/netstandard2.0/Pastel.dll",
+        "lib/netstandard2.0/Pastel.xml",
+        "pastel.3.0.1.nupkg.sha512",
+        "pastel.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "pastel >= 3.0.1"
+    ]
   },
   "packageFolders": {
     "/home/iokg/.nuget/packages/": {}
@@ -43,6 +73,12 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "pastel": {
+            "target": "Package",
+            "version": "[3.0.1, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
