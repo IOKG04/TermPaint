@@ -23,6 +23,7 @@ public struct Pixoid{
 		return BitConverter.ToInt32(SHA256.HashData(BitConverter.GetBytes((int)character ^ text_color.GetHashCode() ^ (background_color.R ^ background_color.GetHashCode()))));
 	}
 	/// <summary>Returns true if type and hash are equal</summary>
+	/// <param name="obj">The object to be compared against</param>
 	public override bool Equals(object? obj){
 		return obj != null && obj.GetType() == this.GetType() && obj.GetHashCode() == this.GetHashCode();
 	}
