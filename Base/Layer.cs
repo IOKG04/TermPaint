@@ -9,8 +9,9 @@ namespace TermPaint.Base;
 
 /// <summary>Collection of pixoids</summary>
 public class Layer{
+	private Vec2 _Dimensions;
 	/// <summary>Dimensions of the layer</summary>
-	public Vec2 Dimensions {get{return Dimensions;} private set{Dimensions = value; UpdatePixoid_data();}}
+	public Vec2 Dimensions {get{return _Dimensions;} private set{_Dimensions = value; UpdatePixoid_data();}}
 	/// <summary>Array containing the pixoid data</summary>
 	private Pixoid[,] pixoid_data;
 
@@ -68,6 +69,16 @@ public class Layer{
 			str += '\n';
 		}
 		return str;
+	}
+	public string[] ToStrings(){
+		string[] strs = new string[Dimensions.y];
+		for(int y = 0; y < Dimensions.y; y++){
+			strs[y] = "";
+			for(int x = 0; x < Dimensions.x; x++){
+				strs[y] += pixoid_data[x, y].ToString();
+			}
+		}
+		return strs;
 	}
 
 	/// <summary>Creates a layer with the specified height and width</summary>

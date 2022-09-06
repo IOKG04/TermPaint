@@ -1,16 +1,22 @@
 ﻿using System;
-using TermPaint.Base;
 using System.Drawing;
+using TermPaint.Base;
+using TermPaint.Low;
 
 namespace TermPaint;
 
 class Program{
 	static void Main(string[] args){
-		string str = "\x00\x00Me\x00ow\x00";
-		Console.WriteLine(str.Length);
-		Console.WriteLine('\n');
-		for(int i = 0; i < str.Length; i++){
-			Console.WriteLine(str[i]);
+		Layer l = new Layer(8, 4);
+		int i = 40;
+		for(int y = 0; y < l.Dimensions.y; y++){
+			for(int x = 0; x < l.Dimensions.x; x++){
+				i++;
+				l.SetPixoid(x, y, new Pixoid(' ', Color.White, Color.FromKnownColor((KnownColor)i)));
+			}
+		}
+		for(int j = 0; j < l.ToStrings().Length; j++){
+			Console.WriteLine(l.ToStrings()[j]);
 		}
 	}
 }
