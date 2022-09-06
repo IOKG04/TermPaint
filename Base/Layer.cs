@@ -1,10 +1,11 @@
 using System;
 using SHA256 = System.Security.Cryptography.SHA256;
+using Pastel;
 using TermPaint.Low;
 
-namespace TermPaint.Base;
+//TODO: Add ToString[] (Lines on dirfferent array-elements)
 
-//TODO: Add equals and getHashCode
+namespace TermPaint.Base;
 
 /// <summary>Collection of pixoids</summary>
 public class Layer{
@@ -57,6 +58,17 @@ public class Layer{
 	public override bool Equals(object? obj){
 		return obj != null && obj.GetType() == this.GetType() && obj.GetHashCode() == this.GetHashCode();
 	}
+	/// <summary>Returns this layer as a string, with the lines seperated using linebreaks</summary>
+	public override string ToString(){
+		string str = "";
+		for(int y = 0; y < Dimensions.y; y++){
+			for(int x = 0; x < Dimensions.x; x++){
+				str += pixoid_data[x, y].ToString();
+			}
+			str += '\n';
+		}
+		return str;
+	}
 
 	/// <summary>Creates a layer with the specified height and width</summary>
 	/// <param name="_Width">Width of the layer</param>
@@ -85,4 +97,11 @@ public class Layer{
 
 	/// <summary>Null equivalent for layers</summary>
 	public static Layer Empty = new Layer();
+
+	public static bool operator ==(Layer a, Layer b){
+		return a.Dimensions == b.Dimensions && a.GetHashCode() == b.GetHashCode();
+	}
+	public static bool operator !=(Layer a, Layer b){
+		return !(a == b);
+	}
 }
