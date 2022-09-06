@@ -3,8 +3,6 @@ using SHA256 = System.Security.Cryptography.SHA256;
 using Pastel;
 using TermPaint.Low;
 
-//TODO: Add ToString[] (Lines on dirfferent array-elements)
-
 namespace TermPaint.Base;
 
 /// <summary>Collection of pixoids</summary>
