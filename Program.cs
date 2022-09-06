@@ -6,14 +6,11 @@ namespace TermPaint;
 
 class Program{
 	static void Main(string[] args){
-		Pixoid p0 = new Pixoid('I', Color.FromArgb(255, 16, 255, 16), Color.FromArgb(255, 255, 0, 32));
-		Pixoid p1 = new Pixoid('J', Color.FromArgb(255, 16, 255, 16), Color.FromArgb(255, 255, 0, 32));
-		Pixoid p2 = new Pixoid('I', Color.FromArgb(255, 16, 254, 16), Color.FromArgb(255, 255, 0, 32));
-		Pixoid p3 = new Pixoid('I', Color.FromArgb(255, 16, 255, 16), Color.FromArgb(255, 255, 1, 32));
-
-		Console.WriteLine(p0.ToString() + " : " + p0.GetHashCode());
-		Console.WriteLine(p1.ToString() + " : " + p1.GetHashCode());
-		Console.WriteLine(p2.ToString() + " : " + p2.GetHashCode());
-		Console.WriteLine(p3.ToString() + " : " + p3.GetHashCode());
+		string str = "\x00\x00Me\x00ow\x00";
+		Console.WriteLine(str.Length);
+		Console.WriteLine('\n');
+		for(int i = 0; i < str.Length; i++){
+			Console.WriteLine(str[i]);
+		}
 	}
 }
