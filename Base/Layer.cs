@@ -28,7 +28,7 @@ public class Layer{
 	private void InitPixoid_data(){
 		for(int x = 0; x < pixoid_data.GetLength(0); x++){
 			for(int y = 0; y < pixoid_data.GetLength(1); y++){
-				if(pixoid_data[x, y] != null) continue;
+				if(pixoid_data[x, y] != Pixoid.Empty) continue;
 				pixoid_data[x, y] = Pixoid.Empty;
 			}
 		}
@@ -131,7 +131,7 @@ public class Layer{
 	}
 
 	/// <summary>Null equivalent for layers</summary>
-	public static Layer Empty = new Layer();
+	public static Layer Empty {get {return new Layer();}}
 
 	public static bool operator ==(Layer a, Layer b){
 		return a.Dimensions == b.Dimensions && a.GetHashCode() == b.GetHashCode();

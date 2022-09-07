@@ -54,5 +54,5 @@ public struct Pixoid{
 	}
 
 	/// <summary>Null equivalent for pixoids</summary>
-	public static Pixoid Empty = new Pixoid();
+	public static Pixoid Empty {get {return new Pixoid();}}
 }

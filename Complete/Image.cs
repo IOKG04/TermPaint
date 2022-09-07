@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TermPaint.Base;
 
 //TODO: Add rendering with ToString() ToStrings()
-//TODO: Add AddLayer() DeleteLayer(int)
+//TODO: Add MoveLayer(int, int)
 
 namespace TermPaint.Complete;
 
@@ -20,10 +20,41 @@ public class Image{
 		if(newOnTop) this.Layers = Image.Merge(this, img).Layers;
 		else this.Layers = Image.Merge(img, this).Layers;
 	}
+	/// <summary>Adds an empty layer</summary>
+	public void AddLayer(){
+		Layers.Add(new Layer());
+	}
 	/// <summary>Adds a layer to this image</summary>
 	/// <param name="l">Layer to be added</param>
 	public void AddLayer(Layer l){
 		Layers.Add(l);
+	}
+
+	/// <summary>Deleted the specified layer</summary>
+	/// <param name="i">Index of the layer to be deleted</param>
+	public void DeleteLayer(int i){
+		Layers.RemoveAt(i);
+	}
+	/// <summary>Switches the specified layers</summary>
+	/// <param name="a">Index of the first layer</param>
+	/// <param name="b">Index of the second layer</param>
+	public void SwitchLayer(int a, int b){
+		Layer l = new Layer(Layers[a]);
+		Layers[a] = new Layer(Layers[b]);
+		Layers[b] = l;
+		
+	}
+	public void MoveLayer(int position, int newPosition){
+		if(position > newPosition){
+			for(int i = position; i > newPosition; i--){
+				SwitchLayer(i, i - 1);
+			}
+		}
+		else{
+			for(int i = position; i < newPosition; i++){
+				SwitchLayer(i, i + 1);
+			}
+		}
 	}
 
 	/// <summary>Creates a new  based on an array of layers</summary>
@@ -34,9 +65,9 @@ public class Image{
 	/// <summary>Creates a new image with a specified number of layers</summary>
 	/// <param name="i">Number of layers the image containes</param>
 	public Image(int i){
-		Layers = new List<Layer>(i);
+		Layers = new List<Layer>();
 		for(int j = 0; j < i; j++){
-			Layers[j] = new Layer();
+			Layers.Add(Layer.Empty);
 		}
 	}
 	/// <summary>Creates a copy of the image given</summary>
@@ -50,7 +81,7 @@ public class Image{
 	}
 
 	/// <summary>Null equivalent for images</summary>
-	public static Image Empty = new Image();
+	public static Image Empty {get {return new Image();}}
 
 	/// <summary>Merges two images into one</summary>
 	/// <param name="a">Lower image</param>
