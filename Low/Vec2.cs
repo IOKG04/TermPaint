@@ -33,6 +33,9 @@ public struct Vec2{
 		y = 0;
 	}
 
+	/// <summary>Vec2 with 0, 0</summary>
+	public static Vec2 Zero = new Vec2(0, 0);
+
 	public static bool operator ==(Vec2 a, Vec2 b){
 		return a.x == b.x && a.y == b.y;
 	}
