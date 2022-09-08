@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
+using SHA256 = System.Security.Cryptography.SHA256;
 using TermPaint.Base;
 using TermPaint.Low;
-
-//TODO: Add rendering with ToString() ToStrings()
 
 namespace TermPaint.Complete;
 
@@ -95,6 +94,15 @@ public class Image{
 		}
 
 		return strss;
+	}
+
+	/// <summary>Returns the hash of this image</summary>
+	public override int GetHashCode(){
+		return BitConverter.ToInt32(SHA256.HashData(BitConverter.GetBytes(GetHashCode() ^ Layers.GetHashCode())));
+	}
+	/// <summary>Returns true if type and hash are equal</summary>
+	public override bool Equals(object? obj){
+		return obj != null && obj.GetType() == this.GetType() && obj.GetHashCode() == this.GetHashCode();
 	}
 
 	/// <summary>Creates a new  based on an array of layers</summary>
