@@ -15,6 +15,8 @@ public class Layer{
 	public string name;
 	/// <summary>Position of the layer</summary>
 	public Vec2 position;
+	/// <summary>Whether or not to render this layer</summary>
+	public bool visible;
 
 	/// <summary>Set's pixoid data to new dimensions</summary>
 	private void UpdatePixoid_data(){
@@ -101,6 +103,7 @@ public class Layer{
 		Dimensions = new Vec2(_Width, _Height);
 		name = _name;
 		position = new Vec2(0, 0);
+		visible = true;
 	}
 	/// <summary>Creates a layer with the specified dimensions</summary>
 	/// <param name="_Dimensions">Dimensions of the layer</param>
@@ -110,6 +113,7 @@ public class Layer{
 		Dimensions = _Dimensions;
 		name = _name;
 		position = new Vec2(0, 0);
+		visible = true;
 	}
 	/// <summary>Creates a layer with the specified pixoid data</summary>
 	/// <param name="_pixoid_data">Pixoid data of the layer</param>
@@ -119,6 +123,7 @@ public class Layer{
 		Dimensions = new Vec2(pixoid_data.GetLength(0), pixoid_data.GetLength(1));
 		name = _name;
 		position = new Vec2(0, 0);
+		visible = true;
 	}
 	/// <summary>Creates copy of the layer given</summary>
 	/// <param name="l">Layer copied from</param>
@@ -127,6 +132,7 @@ public class Layer{
 		Dimensions = l.Dimensions;
 		name = l.name;
 		position = new Vec2(0, 0);
+		visible = true;
 	}
 	/// <summary>Creates an empty layer</summary>
 	public Layer(string _name = "New Layer"){
@@ -135,6 +141,7 @@ public class Layer{
 		Dimensions = new Vec2();
 		name = _name;
 		position = new Vec2(0, 0);
+		visible = true;
 	}
 
 	/// <summary>Null equivalent for layers</summary>

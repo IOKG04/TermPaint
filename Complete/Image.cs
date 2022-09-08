@@ -85,6 +85,7 @@ public class Image{
 		string[,] strss = new string[dimensions.x, dimensions.y];
 
 		for(int i = 0; i < Layers.Count; i++){
+			if(!Layers[i].visible) continue;
 			for(int x = 0; x < Layers[i].Dimensions.x; x++){
 				for(int y = 0; y < Layers[i].Dimensions.y; y++){
 					if(x + Layers[i].position.x >= dimensions.x || y + Layers[i].position.y >= dimensions.y || Layers[i].GetPixoid(x, y).character == '\x00') continue;
