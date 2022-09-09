@@ -31,8 +31,8 @@ class Program{
 
 		Console.WriteLine(img.ToString());
 
-		GUI g = new GUI(img, new Vec2(10, 5));
-	//	g.layerOrderListStart = 1;
+		GUI g = new GUI(img, new Vec2(32, 10));
+		g.SetBrush (new Pixoid('/', Color.Tan, Color.FromArgb(0x45, 0x33, 0x01)));
 		string[,] strss = g.ToStringss();
 		for(int y = 0; y < strss.GetLength(1); y++){
 			for(int x = 0; x < strss.GetLength(0); x++){
