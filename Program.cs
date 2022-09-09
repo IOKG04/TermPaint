@@ -31,7 +31,8 @@ class Program{
 
 		Console.WriteLine(img.ToString());
 
-		GUI g = new GUI(img, new Vec2(10, 10));
+		GUI g = new GUI(img, new Vec2(10, 5));
+	//	g.layerOrderListStart = 1;
 		string[,] strss = g.ToStringss();
 		for(int y = 0; y < strss.GetLength(1); y++){
 			for(int x = 0; x < strss.GetLength(0); x++){

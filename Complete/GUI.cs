@@ -36,10 +36,10 @@ public class GUI{
 		for(int y = 1; y < layerOrderLength && y + layerOrderListStart <= Img.Layers.Count; y++){
 			for(int x = 0; x < strss.GetLength(0); x++){
 				try{
-					strss[x, y + layerOrderListStart] = Img.Layers[y + layerOrderListStart - 1].name[x].ToString().Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
+					strss[x, y + layerOrderStart] = Img.Layers[y + layerOrderListStart - 1].name[x].ToString().Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
 				}
 				catch{
-					strss[x, y + layerOrderListStart] = " ".Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
+					strss[x, y + layerOrderStart] = " ".Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
 				}
 			}
 		}
