@@ -31,15 +31,17 @@ public class GUI{
 
 		//Add Layer-order
 		for(int x = 0; x < strss.GetLength(0); x++){
-			if(x == 0) strss[x, layerOrderStart] = "L".Pastel(Color.White).PastelBg(Color.DarkGray);
-			else if(x == 1) strss[x, layerOrderStart] = "A".Pastel(Color.White).PastelBg(Color.DarkGray);
-			else if(x == 2) strss[x, layerOrderStart] = "Y".Pastel(Color.White).PastelBg(Color.DarkGray);
-			else if(x == 3) strss[x, layerOrderStart] = "E".Pastel(Color.White).PastelBg(Color.DarkGray);
-			else if(x == 4) strss[x, layerOrderStart] = "R".Pastel(Color.White).PastelBg(Color.DarkGray);
-			else if(x == 5) strss[x, layerOrderStart] = "S".Pastel(Color.White).PastelBg(Color.DarkGray);
-			else strss[x, layerOrderStart] = " ".Pastel(Color.White).PastelBg(Color.DarkGray);
+			strss[x, layerOrderStart] = "-".Pastel(Color.White).PastelBg(Color.DarkGray);
 		}
-		for(int y = layerOrderStart + 2; y < layerOrderLength + layerOrderStart; y++){
+		for(int y = 1; y < layerOrderLength && y + layerOrderListStart <= Img.Layers.Count; y++){
+			for(int x = 0; x < strss.GetLength(0); x++){
+				try{
+					strss[x, y + layerOrderListStart] = Img.Layers[y + layerOrderListStart - 1].name[x].ToString().Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
+				}
+				catch{
+					strss[x, y + layerOrderListStart] = " ".Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
+				}
+			}
 		}
 		
 		return strss;
