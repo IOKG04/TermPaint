@@ -98,7 +98,7 @@ public static class FileConv{
 	public static Layer ToLayer(byte[] b){
 		Layer l = new Layer();
 
-		if(b.Length < 21) throw new Exception("Way too not enough arguments");
+		if(b.LongLength < 21) throw new Exception("Way too not enough arguments");
 
 		l.Dimensions = new Vec2(BitConverter.ToInt32(b, 0), BitConverter.ToInt32(b, 4));
 		l.position = new Vec2(BitConverter.ToInt32(b, 8), BitConverter.ToInt32(b, 12));
@@ -110,7 +110,7 @@ public static class FileConv{
 		}
 		l.name = name;
 
-		if(b.Length < 21 + (l.name.Length * 2) + (l.Dimensions.x * l.Dimensions.y * 8)) throw new Exception("Still not enough arguments");
+		if(b.LongLength < 21 + (l.name.Length * 2) + (l.Dimensions.x * l.Dimensions.y * 8)) throw new Exception("Still not enough arguments");
 
 		for(int y = 0; y < l.Dimensions.y; y++){
 			for(int x = 0; x < l.Dimensions.x; x++){
@@ -125,6 +125,8 @@ public static class FileConv{
 		return l;
 	}
 
+	/// <summary>Imgage -> byte[]</summary>
+	/// <param name="img">Image to convert</param>
 	public static byte[] ToData(Image img){
 		long length = 12;
 		for(int i = 0; i < img.Layers.Count; i++){
@@ -167,6 +169,38 @@ public static class FileConv{
 		}
 
 		return bytes;
+	}
+	/// <summary>Byte[] -> image</summary>
+	/// <param name="b">Bytes to convert</param>
+	public static Image ToImage(byte[] b){
+		if(b.LongLength < 12) throw new Exception("Not enough bytes in b");
+
+		Image img = new Image();
+
+		//Add metadata
+		img.dimensions.x = BitConverter.ToInt32(b, 0);
+		img.dimensions.y = BitConverter.ToInt32(b, 4);
+		int layer_amount = BitConverter.ToInt32(b, 8);
+
+		//Return if layer_amount is 0
+		if(layer_amount == 0) return img;
+
+		if(b.LongLength < 12 + (layer_amount * 8)) throw new Exception("Still not enough arguments");
+
+		//Add layers
+		long currentmin = 12;
+		for(int i = 0; i < layer_amount; i++){
+			long l = BitConverter.ToInt64(b, (int)currentmin);
+			byte[] layerdata = new byte[l];
+			currentmin += 8;
+			for(int j = 0; j < l; j++){
+				layerdata[i] = b[currentmin + i];
+			}
+			currentmin += l;
+			img.AddLayer(ToLayer(layerdata));
+		}
+
+		return img;
 	}
 
 	private static byte[] Join(byte[] a, byte[] b){

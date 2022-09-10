@@ -30,5 +30,8 @@ public class Program{
 
 		Console.WriteLine(img.ToString());
 		byte[] bytes = FileConv.ToData(img);
+		Image img2 = FileConv.ToImage(bytes);
+
+		Console.WriteLine(img.ToString());
 	}
 }
