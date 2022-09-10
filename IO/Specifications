@@ -2,7 +2,7 @@ The following specifications specify how an image is saved to a file
 
 	Byte(s)	Variable		Usage
 
-Image-Metainfo:
+Image-Metadata:
 	0..3:	dimensions.x
  	4..7:	dimensions.y
 	8..11:	Layers.Count
@@ -11,7 +11,7 @@ Image-Metainfo:
 	16...:	Layers			Copies of Layer specification for different layers
 
 Layer:
- Layer-Metainfo:
+ Layer-Metadata:
 	0..3:	Dimensions.x
 	4..7:	Dimensions.y
 	8..11:	position.x

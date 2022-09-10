@@ -38,8 +38,9 @@ public static class File{
 
 	public static byte[] ToData(Layer l){
 		//TODO: Finsish
-		byte[] bytes = new byte[21 + l.name.Length + (l.Dimensions.x * l.Dimensions.y)];
+		byte[] bytes = new byte[21 + (l.name.Length * 2) + (l.Dimensions.x * l.Dimensions.y * 8)];
 
+		//Add Metadata
 		byte[] currentInformation = new byte[21];
 		currentInformation[0] = BitConverter.GetBytes(l.Dimensions.x)[0];
 		currentInformation[1] = BitConverter.GetBytes(l.Dimensions.x)[1];
@@ -62,6 +63,19 @@ public static class File{
 		currentInformation[18] = BitConverter.GetBytes(l.name.Length)[1];
 		currentInformation[19] = BitConverter.GetBytes(l.name.Length)[2];
 		currentInformation[20] = BitConverter.GetBytes(l.name.Length)[3];
+		for(int i = 0; i < 21; i++){
+			bytes[i] = currentInformation[i];
+		}
+
+		//Add l.name
+		currentInformation = new byte[l.name.Length * 2];
+		for(int i = 0; i < l.name.Length; i++){
+			currentInformation[i] = BitConverter.GetBytes(l.name[i])[0];
+			currentInformation[i + 1] = BitConverter.GetBytes(l.name[i])[1];
+		}
+		for(int i = 0; i < l.name.Length * 2; i++){
+			bytes[i + 21] = currentInformation[i];
+		}
 
 		return bytes;
 	}
