@@ -6,7 +6,7 @@ using TermPaint.Complete;
 
 namespace TermPaint;
 
-class Program{
+public class Program{
 	static void Main(string[] args){
 		Image img = new Image();
 		Layer l1 = new Layer(10, 10, _name: "Layer 1");
@@ -33,12 +33,8 @@ class Program{
 
 		GUI g = new GUI(img, new Vec2(32, 10));
 		g.SetBrush (new Pixoid('/', Color.Tan, Color.FromArgb(0x45, 0x33, 0x01)));
-		string[,] strss = g.ToStringss();
-		for(int y = 0; y < strss.GetLength(1); y++){
-			for(int x = 0; x < strss.GetLength(0); x++){
-				Console.Write(strss[x, y]);
-			}
-			Console.WriteLine();
-		}
+		Console.WriteLine(g.ToString());
+		img.Layers[2].visible = true;
+		Console.WriteLine(g.ToString());
 	}
 }

@@ -1,0 +1,28 @@
+The following specifications specify how an image is saved to a file
+
+	Byte(s)	Variable		Usage
+
+Image-Metainfo:
+	0..3:	dimensions.x
+ 	4..7:	dimensions.y
+	8..11:	Layers.Count
+	12..15:	GetHashCode()		Error testing ; Compare with new GetHashCode() -> Equal means no errors , otherwise errors
+
+	16...:	Layers			Copies of Layer specification for different layers
+
+Layer:
+ Layer-Metainfo:
+	0..3:	Dimensions.x
+	4..7:	Dimensions.y
+	8..11:	position.x
+	12..15:	position.y
+	16:	visible
+	17..20:	name.Length		Reading right amount of bytes for name
+	21..:	name
+
+	...:	pixoid_data		Copies of Pixoid specification for different pixoids ; Amount of pixoids can be figured out using Dimensions
+
+ Pixoid:
+ 	0..1:	character
+	2..4:	text_color
+	5..7:	background_color
