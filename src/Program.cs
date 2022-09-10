@@ -10,31 +10,25 @@ namespace TermPaint;
 public class Program{
 	static void Main(string[] args){
 		Layer l1 = new Layer(10, 10, _name: "Layer 1");
+		Layer l2 = new Layer(6, 6, _name: "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
 		for(int x = 0; x < 10; x++){
 			for(int y = 0; y < 10; y++){
 				try{
 					l1.SetPixoid(x, y, new Pixoid('\\', Color.White, Color.Red));
+					l2.SetPixoid(x, y, new Pixoid('L', Color.Indigo, Color.MidnightBlue));
 				}
 				catch{
 				}
 			}
 		}
-		l1.SetPixoid(3, 7, new Pixoid('A', Color.Crimson, Color.DarkSalmon));
+		l2.position = new Vec2(0, 1);
+		l1.SetPixoid(3, 8, new Pixoid('A', Color.Crimson, Color.DarkSalmon));
 
-		Console.WriteLine(l1.name);
-		Console.Write(l1.ToString());
-		Console.WriteLine(l1.visible);
-		Console.WriteLine(l1.Dimensions.x);
-		Console.WriteLine(l1.Dimensions.y);
-		Console.WriteLine();
+		Image img = new Image(new Vec2(10, 10));
+		img.AddLayer(l1);
+		img.AddLayer(l2);
 
-		byte[] b = FileConv.ToData(l1);
-		Layer l2 = FileConv.ToLayer(b);
-
-		Console.WriteLine(l2.name);
-		Console.WriteLine(l2.ToString());
-		Console.WriteLine(l2.visible);
-		Console.WriteLine(l2.Dimensions.x);
-		Console.WriteLine(l2.Dimensions.y);
+		Console.WriteLine(img.ToString());
+		byte[] bytes = FileConv.ToData(img);
 	}
 }

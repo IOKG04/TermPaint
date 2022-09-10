@@ -6,11 +6,12 @@ Image-Metadata:
 	0..3:	dimensions.x
  	4..7:	dimensions.y
 	8..11:	Layers.Count
-	12..15:	GetHashCode()		Error testing ; Compare with new GetHashCode() -> Equal means no errors , otherwise errors
 
-	16...:	Layers			Copies of Layer specification for different layers
+	12...:	Layers			Copies of Layer specification for different layers
 
 Layer:
+	0..7	Length			Length of layer bytes ; Contained only in GetBytes(Image) as it is not needed for an individual layer
+
  Layer-Metadata:
 	0..3:	Dimensions.x
 	4..7:	Dimensions.y

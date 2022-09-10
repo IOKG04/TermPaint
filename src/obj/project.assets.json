@@ -43,11 +43,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/media/MassMedia/iokg/c#/TermPaint/TermPaint.csproj",
+      "projectUniqueName": "/media/MassMedia/iokg/c#/TermPaint/src/TermPaint.csproj",
       "projectName": "TermPaint",
-      "projectPath": "/media/MassMedia/iokg/c#/TermPaint/TermPaint.csproj",
+      "projectPath": "/media/MassMedia/iokg/c#/TermPaint/src/TermPaint.csproj",
       "packagesPath": "/home/iokg/.nuget/packages/",
-      "outputPath": "/media/MassMedia/iokg/c#/TermPaint/obj/",
+      "outputPath": "/media/MassMedia/iokg/c#/TermPaint/src/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/iokg/.nuget/NuGet/NuGet.Config"

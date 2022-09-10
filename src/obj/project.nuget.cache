@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "j4Vg5CQvRYnfLgudsBRVfaNs7epk0NqX5ddmJbtCmCDKgyCYkuGDszNUHZxlX+USx6cXS/MhKfyTR1ZvBin0xQ==",
+  "dgSpecHash": "Jg7rq+rD5MdmxO7JC1njs29CKdRugjDid0TF79rP7JMbj6Uk7heEzMSHerka3IJKW8kFKHF1eNI/CxpWjoUJTg==",
   "success": true,
-  "projectFilePath": "/media/MassMedia/iokg/c#/TermPaint/TermPaint.csproj",
+  "projectFilePath": "/media/MassMedia/iokg/c#/TermPaint/src/TermPaint.csproj",
   "expectedPackageFiles": [
     "/home/iokg/.nuget/packages/pastel/3.0.1/pastel.3.0.1.nupkg.sha512",
     "/home/iokg/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.8/microsoft.aspnetcore.app.ref.6.0.8.nupkg.sha512"

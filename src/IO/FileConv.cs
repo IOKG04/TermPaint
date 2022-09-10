@@ -93,6 +93,8 @@ public static class FileConv{
 
 		return bytes;
 	}
+	/// <summary>Byte[] -> layer</summary>
+	/// <param name="b">Bytes to convert</param>
 	public static Layer ToLayer(byte[] b){
 		Layer l = new Layer();
 
@@ -121,6 +123,50 @@ public static class FileConv{
 		}
 
 		return l;
+	}
+
+	public static byte[] ToData(Image img){
+		long length = 12;
+		for(int i = 0; i < img.Layers.Count; i++){
+			length += 8;
+			length += ToData(img.Layers[i]).LongLength;
+		}
+		byte[] bytes = new byte[length];
+
+		//Add metadata
+		bytes[0] = BitConverter.GetBytes(img.dimensions.x)[0];
+		bytes[1] = BitConverter.GetBytes(img.dimensions.x)[1];
+		bytes[2] = BitConverter.GetBytes(img.dimensions.x)[2];
+		bytes[3] = BitConverter.GetBytes(img.dimensions.x)[3];
+		bytes[4] = BitConverter.GetBytes(img.dimensions.y)[0];
+		bytes[5] = BitConverter.GetBytes(img.dimensions.y)[1];
+		bytes[6] = BitConverter.GetBytes(img.dimensions.y)[2];
+		bytes[7] = BitConverter.GetBytes(img.dimensions.y)[3];
+		bytes[8] = BitConverter.GetBytes(img.Layers.Count)[0];
+		bytes[9] = BitConverter.GetBytes(img.Layers.Count)[1];
+		bytes[10] = BitConverter.GetBytes(img.Layers.Count)[2];
+		bytes[11] = BitConverter.GetBytes(img.Layers.Count)[3];
+
+		//Add layerinformations
+		long currentmin = 12;
+		for(int i = 0; i < img.Layers.Count; i++){
+			byte[] layerData = ToData(img.Layers[i]);
+			bytes[currentmin + 0] = BitConverter.GetBytes(layerData.LongLength)[0];
+			bytes[currentmin + 1] = BitConverter.GetBytes(layerData.LongLength)[1];
+			bytes[currentmin + 2] = BitConverter.GetBytes(layerData.LongLength)[2];
+			bytes[currentmin + 3] = BitConverter.GetBytes(layerData.LongLength)[3];
+			bytes[currentmin + 4] = BitConverter.GetBytes(layerData.LongLength)[4];
+			bytes[currentmin + 5] = BitConverter.GetBytes(layerData.LongLength)[5];
+			bytes[currentmin + 6] = BitConverter.GetBytes(layerData.LongLength)[6];
+			bytes[currentmin + 7] = BitConverter.GetBytes(layerData.LongLength)[7];
+			currentmin += 8;
+			for(long l = 0; l < layerData.LongLength; l++){
+				bytes[currentmin + l] = layerData[l];
+			}
+			currentmin += layerData.LongLength;
+		}
+
+		return bytes;
 	}
 
 	private static byte[] Join(byte[] a, byte[] b){
