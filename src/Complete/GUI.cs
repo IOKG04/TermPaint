@@ -24,6 +24,8 @@ public class GUI{
 	public int layerOrderLength;
 	/// <summary>Object in Img.Layers to start with</summary>
 	public int layerOrderListStart;
+	/// <summary>Layer currently selected</summary>
+	public int selectedLayer;
 
 	public void SetBrush(Pixoid _brush){
 		brush = _brush;
@@ -77,7 +79,7 @@ public class GUI{
 		for(int y = 1; y < layerOrderLength && y + layerOrderListStart <= Img.Layers.Count; y++){
 			for(int x = 0; x < strss.GetLength(0); x++){
 				try{
-					strss[x, y + layerOrderStart] = Img.Layers[y + layerOrderListStart - 1].name[x].ToString().Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
+					strss[x, y + layerOrderStart] = Img.Layers[y + layerOrderListStart - 1].name[x].ToString().Pastel(y + layerOrderListStart - 1 == selectedLayer ? Color.Gold : Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
 				}
 				catch{
 					strss[x, y + layerOrderStart] = " ".Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
