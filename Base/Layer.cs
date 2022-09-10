@@ -8,7 +8,7 @@ namespace TermPaint.Base;
 public class Layer{
 	private Vec2 _Dimensions;
 	/// <summary>Dimensions of the layer</summary>
-	public Vec2 Dimensions {get{return _Dimensions;} private set{_Dimensions = value; UpdatePixoid_data();}}
+	public Vec2 Dimensions {get{return _Dimensions;} set{_Dimensions = value; UpdatePixoid_data();}}
 	/// <summary>Array containing the pixoid data</summary>
 	private Pixoid[,] pixoid_data;
 	/// <summary>Name of the layer</summary>

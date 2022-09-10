@@ -20,7 +20,7 @@ Layer:
 	17..20:	name.Length		Reading right amount of bytes for name
 	21..:	name
 
-	...:	pixoid_data		Copies of Pixoid specification for different pixoids ; Amount of pixoids can be figured out using Dimensions
+	...:	pixoid_data		Copies of Pixoid specification for different pixoids ; Amount of pixoids can be figured out using Dimensions ; Stored in x++, y++ format
 
  Pixoid:
  	0..1:	character

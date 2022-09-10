@@ -1,12 +1,13 @@
 using System;
 using System.Drawing;
+using TermPaint.Low;
 using TermPaint.Base;
 using TermPaint.Complete;
 
 namespace TermPaint.IO;
 
 /// <summary>For converting images, layers and pixoids to bytes and reverse</summary>
-public static class File{
+public static class FileConv{
 	/// <summary>Pixoid -> byte[]</summary>
 	/// <param name="p">Pixoid to convert</param>
 	public static byte[] ToData(Pixoid p){
@@ -36,6 +37,8 @@ public static class File{
 		return p;
 	}
 
+	/// <summary>Layer -> byte[]</summary>
+	/// <param name="l">Layer to convert</param>
 	public static byte[] ToData(Layer l){
 		//TODO: Finsish
 		byte[] bytes = new byte[21 + (l.name.Length * 2) + (l.Dimensions.x * l.Dimensions.y * 8)];
@@ -70,14 +73,54 @@ public static class File{
 		//Add l.name
 		currentInformation = new byte[l.name.Length * 2];
 		for(int i = 0; i < l.name.Length; i++){
-			currentInformation[i] = BitConverter.GetBytes(l.name[i])[0];
-			currentInformation[i + 1] = BitConverter.GetBytes(l.name[i])[1];
+			currentInformation[(2 * i)] = BitConverter.GetBytes(l.name[i])[0];
+			currentInformation[(2 * i) + 1] = BitConverter.GetBytes(l.name[i])[1];
 		}
 		for(int i = 0; i < l.name.Length * 2; i++){
 			bytes[i + 21] = currentInformation[i];
 		}
 
+		//Add pixoid_data
+		currentInformation = new byte[0];
+		for(int y = 0; y < l.Dimensions.y; y++){
+			for(int x = 0; x < l.Dimensions.x; x++){
+				currentInformation = Join(currentInformation, ToData(l.GetPixoid(x, y)));
+			}
+		}
+		for(int i = 0; i < currentInformation.Length; i++){
+			bytes[i + 21 + (l.name.Length * 2)] = currentInformation[i];
+		}
+
 		return bytes;
+	}
+	public static Layer ToLayer(byte[] b){
+		Layer l = new Layer();
+
+		if(b.Length < 21) throw new Exception("Way too not enough arguments");
+
+		l.Dimensions = new Vec2(BitConverter.ToInt32(b, 0), BitConverter.ToInt32(b, 4));
+		l.position = new Vec2(BitConverter.ToInt32(b, 8), BitConverter.ToInt32(b, 12));
+		l.visible = b[16] > 127 ? true : false;
+		int nameLength = BitConverter.ToInt32(b, 17);
+		string name = "";
+		for(int i = 0; i < nameLength; i++){
+			name += BitConverter.ToChar(b, (i * 2) + 21);
+		}
+		l.name = name;
+
+		if(b.Length < 21 + (l.name.Length * 2) + (l.Dimensions.x * l.Dimensions.y * 8)) throw new Exception("Still not enough arguments");
+
+		for(int y = 0; y < l.Dimensions.y; y++){
+			for(int x = 0; x < l.Dimensions.x; x++){
+				byte[] pixoidBytes = new byte[8];
+				for(int i = 0; i < 8; i++){
+					pixoidBytes[i] = b[(y * l.Dimensions.x * 8) + (x * 8) + i + 21 + l.name.Length * 2];
+				}
+				l.SetPixoid(x, y, ToPixoid(pixoidBytes));
+			}
+		}
+
+		return l;
 	}
 
 	private static byte[] Join(byte[] a, byte[] b){
