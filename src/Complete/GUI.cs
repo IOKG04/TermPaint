@@ -85,6 +85,7 @@ public class GUI{
 					strss[x, y + layerOrderStart] = " ".Pastel(Color.White).PastelBg(Img.Layers[y + layerOrderListStart - 1].visible ? Color.DarkGray : Color.LightGray);
 				}
 			}
+
 		}
 		
 		return strss;

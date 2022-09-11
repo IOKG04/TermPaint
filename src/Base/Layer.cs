@@ -88,7 +88,7 @@ public class Layer{
 		for(int y = 0; y < Dimensions.y; y++){
 			strs[y] = "";
 			for(int x = 0; x < Dimensions.x; x++){
-				strs[y] += pixoid_data[x, y].ToString();
+				strs[y] += pixoid_data[x, y].ToString().Replace('\x00', ' ');
 			}
 		}
 		return strs;
@@ -131,8 +131,8 @@ public class Layer{
 		pixoid_data = l.pixoid_data;
 		Dimensions = l.Dimensions;
 		name = l.name;
-		position = new Vec2(0, 0);
-		visible = true;
+		position = l.position;
+		visible = l.visible;
 	}
 	/// <summary>Creates an empty layer</summary>
 	public Layer(string _name = "New Layer"){
